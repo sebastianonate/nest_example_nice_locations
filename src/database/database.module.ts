@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from 'src/config/config.module';
+import { ConfigModule } from '../config/config.module';
 import { MysqlTypeOrmConfigService } from './mysql-typeorm-config.service';
 
 @Module({
