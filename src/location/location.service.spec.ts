@@ -1,21 +1,31 @@
-// import { Test, TestingModule } from '@nestjs/testing';
-// import { LocationService } from './location.service';
+import { Test, TestingModule } from '@nestjs/testing';
+import Sinon from 'sinon';
+import { Repository } from 'typeorm';
+import { Location } from './location.entity';
+import { LocationService } from './location.service';
 
-// describe('LocationService', () => {
-//   let service: LocationService;
+describe('LocationService', () => {
+  let service: LocationService;
+  let mockRepository:Repository<Location>;
+  let mock: Sinon.SinonMock;
 
-//   beforeEach(async () => {
-//     service = new LocationService();
-//   });
+  beforeEach(async () => {
+    mockRepository = { } as Repository<Location>;
+    mockRepository = Object.assign(mockRepository,{
+      find: new Function(),
+    });
+    mock= Sinon.mock(mockRepository);
+    mock.expects('find').resolves([
+      
+    ]);
+    service = new LocationService(mockRepository);
+  });
 
-//   it('should return locations', () => {
+  it('should return locations', () => {
 
-//     expect(service.list()).toMatchObject(
-//       [
-//         'Location 1',
-//         'Location 2',
-//         'Location 3'
-//       ]
-//     );
-//   });
-// });
+    expect(service.list()).resolves.toMatchObject(
+      [
+      ]
+    );
+  });
+});
